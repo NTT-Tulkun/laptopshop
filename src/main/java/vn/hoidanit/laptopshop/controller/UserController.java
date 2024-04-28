@@ -30,17 +30,24 @@ public class UserController {
         return "hello";
     }
 
-    @RequestMapping("admin/user")
+    @RequestMapping("/admin/user")
+    public String getUserPage(Model model) {
+        List<User> users = this.userService.getAllUsers();
+        System.out.println(users);
+        model.addAttribute("users1", users);
+        return "admin/user/table-user";
+    }
+
+    @RequestMapping("/admin/user/create") // mặc định method = RequestMethod.GET
     public String getAddUserPage(Model model) {
-        model.addAttribute("newUser", new User()); // new User() là contractor được tọa tự động bên domain
+        model.addAttribute("newUser", new User()); // new User() là contractor được tạo tự động bên domain
         return "admin/user/create";
     }
 
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
     public String createUserPage(Model model, @ModelAttribute("newUser") User hoidanit) {
         // newUser <=> modelAttribute="newUser" trong form
-        System.out.println("run here " + hoidanit);
         this.userService.handleSaveUser(hoidanit);
-        return "hello";
+        return "redirect:/admin/user"; // nó sẽ GET mapping lại hàm getUserPage
     }
 }

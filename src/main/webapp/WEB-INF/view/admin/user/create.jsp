@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-md-6 col-12 mx-auto">
                             <form:form action="/admin/user/create" method="post" modelAttribute="newUser">
-
+                                <!-- newUser là biến được lấy từ model.addAttribute("newUser", newUser()); nạp vào model bên controller-->
                                 <h1>Create a User</h1>
                                 <hr>
 
