@@ -1,6 +1,19 @@
 package vn.hoidanit.laptopshop.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+// import jakarta.persistence.Table;
+
+@Entity
+// @Table(name = "nguoi_dung")
+// Nếu muốn add table trong csdl mà khác tên class(User)
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // IDENTITY là tự động tăng khóa chính
+    // Annotation @Id và @GeneratedValue CHỈ ứng với thuộc tính ngay bên dưới nó(id)
     private long id;
     private String email;
     private String password;
