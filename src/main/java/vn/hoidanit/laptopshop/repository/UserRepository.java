@@ -9,7 +9,8 @@ import vn.hoidanit.laptopshop.domain.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    User save(User hoidanit);
+    User save(User hoidanit); // save(): vừa lưu những thay đổi nếu đối tượng tồn tại rồi,
+                              // tạo mới nếu chưa tồn tại
 
     List<User> findByEmail(String email); // List<User> là kiểu dữ liệu sẽ trả về
 

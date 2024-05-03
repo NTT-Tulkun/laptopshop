@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -57,5 +58,25 @@ public class UserController {
         // newUser <=> modelAttribute="newUser" trong form
         this.userService.handleSaveUser(hoidanit);
         return "redirect:/admin/user"; // nó sẽ GET mapping lại hàm getUserPage
+    }
+
+    @RequestMapping("/admin/user/update/{iduser}")
+    public String getUpdateUserPage(Model model, @PathVariable long iduser) {
+        User currentUser = this.userService.getUserById(iduser);
+        model.addAttribute("updateUser", currentUser);
+        return "admin/user/update-user";
+    }
+
+    @PostMapping("/admin/user/update") // @PostMapping <==> method = RequestMethod.POST
+    public String postUpdateUser(Model model, @ModelAttribute("updateUser") User hoidanit) {
+        // updateUser <=> modelAttribute="updateUser" trong form update
+        User currentUser = this.userService.getUserById(hoidanit.getId());
+        if (currentUser != null) {
+            currentUser.setPhone(hoidanit.getPhone());
+            currentUser.setFullName(hoidanit.getFullName());
+            currentUser.setAddress(hoidanit.getAddress());
+            this.userService.handleSaveUser(currentUser);
+        }
+        return "redirect:/admin/user";
     }
 }
