@@ -13,6 +13,18 @@
                 <title>Create user</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+                <!-- preview avatar -->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(() => {
+                        const avatarFile = $("#avatarFile");
+                        avatarFile.change(function (e) {
+                            const imgURL = URL.createObjectURL(e.target.files[0]);
+                            $("#avatarPreview").attr("src", imgURL);
+                            $("#avatarPreview").css({ "display": "block" });
+                        });
+                    });
+                </script>
             </head>
 
             <body class="sb-nav-fixed">
@@ -31,27 +43,27 @@
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
                                             <form:form action="/admin/user/create" method="post"
-                                                modelAttribute="newUser">
+                                                modelAttribute="newUser" class="row" enctype="multipart/form-data">
                                                 <!-- newUser là biến được lấy từ model.addAttribute("newUser", newUser()); nạp vào model bên controller-->
                                                 <h1>Create a User</h1>
                                                 <hr>
 
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label for="" class="form-label">Email</label>
                                                     <form:input path="email" type="email" class="form-control" />
                                                 </div>
 
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label for="" class="form-label">Password</label>
                                                     <form:input path="password" type="text" class="form-control" />
                                                 </div>
 
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label for="" class="form-label">Phone number</label>
                                                     <form:input path="phone" type="text" class="form-control" />
                                                 </div>
 
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label for="" class="form-label">Fullname</label>
                                                     <form:input path="fullName" type="text" class="form-control" />
                                                 </div>
@@ -61,7 +73,29 @@
                                                     <form:input path="address" type="text" class="form-control" />
                                                 </div>
 
-                                                <button type="submit" class="btn btn-primary">Create</button>
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="form-label">Role</label>
+                                                    <form:select class="form-select" path="role.name">
+                                                        <!--role.name <=> đối tượng role khai báo trong User khi thực hiện nối quan hệ, name là thuộc tính của class Role -->
+                                                        <form:option value="ADMIN">ADMIN</form:option>
+                                                        <form:option value="USER">USER</form:option>
+                                                    </form:select>
+                                                </div>
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label for="avatarFile" class="form-label">Avatar</label>
+                                                    <input class="form-control" type="file" id="avatarFile"
+                                                        accept=".jpg , .png, .jpeg" name="avatarFile">
+                                                </div>
+
+                                                <div class="mb-3 col-12">
+                                                    <img alt="Avatar Preview" style="display: none; max-height: 250px;"
+                                                        id="avatarPreview">
+                                                </div>
+
+                                                <div class="col-12 mb-5">
+                                                    <button type="submit" class="btn btn-primary">Create</button>
+                                                </div>
                                             </form:form>
 
                                             <!-- 
