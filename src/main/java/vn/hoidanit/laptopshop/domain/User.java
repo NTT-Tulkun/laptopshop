@@ -1,13 +1,18 @@
 package vn.hoidanit.laptopshop.domain;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-// import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
-// @Table(name = "nguoi_dung")
+@Table(name = "users")
 // Nếu muốn add table trong csdl mà khác tên class(User)
 public class User {
     @Id
@@ -21,6 +26,14 @@ public class User {
     private String address;
     private String phone;
     private String avatar;
+
+    // the owner side không được sử dụng mappedBy (tức là table có FK - khóa ngoại)
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+    @OneToMany(mappedBy = "user")
+    List<Order> orders;
 
     public long getId() {
         return id;

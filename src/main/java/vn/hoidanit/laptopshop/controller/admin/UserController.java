@@ -1,4 +1,4 @@
-package vn.hoidanit.laptopshop.controller;
+package vn.hoidanit.laptopshop.controller.admin;
 
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class UserController {
     public String getUserPage(Model model) {
         List<User> users = this.userService.getAllUsers();
         model.addAttribute("users1", users);
-        return "admin/user/table-user";
+        return "admin/user/show";
     }
 
     @RequestMapping("/admin/user/{iduser}")
@@ -44,7 +44,7 @@ public class UserController {
         User user = this.userService.getUserById(iduser);
         model.addAttribute("infoUser", user);
         model.addAttribute("id", iduser);
-        return "admin/user/user-detail";
+        return "admin/user/detail";
     }
 
     @RequestMapping("/admin/user/create") // mặc định method = RequestMethod.GET
@@ -64,7 +64,7 @@ public class UserController {
     public String getUpdateUserPage(Model model, @PathVariable long iduser) {
         User currentUser = this.userService.getUserById(iduser);
         model.addAttribute("updateUser", currentUser);
-        return "admin/user/update-user";
+        return "admin/user/update";
     }
 
     @PostMapping("/admin/user/update") // @PostMapping <==> method = RequestMethod.POST
@@ -84,7 +84,7 @@ public class UserController {
     public String getDeleteUserPage(Model model, @PathVariable long iduser) {
         model.addAttribute("id", iduser);
         model.addAttribute("deleteUser", new User());
-        return "admin/user/delete-user";
+        return "admin/user/delete";
     }
 
     @PostMapping("/admin/user/delete")

@@ -10,7 +10,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                 <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
                 <meta name="author" content="Hỏi Dân IT" />
-                <title>Create user</title>
+                <title>Update user</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
@@ -27,23 +27,24 @@
                                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
                                     <li class="breadcrumb-item active">User</li>
                                 </ol>
-                                <div>
+                                <div class="container mt-5">
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
-                                            <form:form action="/admin/user/create" method="post"
-                                                modelAttribute="newUser">
+                                            <form:form action="/admin/user/update" method="post"
+                                                modelAttribute="updateUser">
                                                 <!-- newUser là biến được lấy từ model.addAttribute("newUser", newUser()); nạp vào model bên controller-->
-                                                <h1>Create a User</h1>
+                                                <h1>Update User</h1>
                                                 <hr>
 
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">Email</label>
-                                                    <form:input path="email" type="email" class="form-control" />
+                                                <div class="mb-3" style="display: none;">
+                                                    <label for="" class="form-label">ID</label>
+                                                    <form:input path="id" type="text" class="form-control" />
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label for="" class="form-label">Password</label>
-                                                    <form:input path="password" type="text" class="form-control" />
+                                                    <label for="" class="form-label">Email</label>
+                                                    <form:input path="email" type="email" class="form-control"
+                                                        disabled="true" />
                                                 </div>
 
                                                 <div class="mb-3">
@@ -61,13 +62,13 @@
                                                     <form:input path="address" type="text" class="form-control" />
                                                 </div>
 
-                                                <button type="submit" class="btn btn-primary">Create</button>
+                                                <button type="submit" class="btn btn-warning">Update</button>
                                             </form:form>
 
                                             <!-- 
-                                        Từng giá trị của path ở trên mỗi thẻ input của form phải đặt trùng với tên biến đã khai báo bên class User
-                                        vd: path="fullName" <=> private String fullName;
-                                        -->
+                                            Từng giá trị của path ở trên mỗi thẻ input của form phải đặt trùng với tên biến đã khai báo bên class User
+                                            vd: path="fullName" <=> private String fullName;
+                                            -->
                                         </div>
                                     </div>
                                 </div>
