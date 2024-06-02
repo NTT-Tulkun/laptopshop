@@ -13,6 +13,17 @@
                 <title>Update user</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(() => {
+                        const avatarFile = $("#avatarFile");
+                        avatarFile.change(function (e) {
+                            const imgURL = URL.createObjectURL(e.target.files[0]);
+                            $("#avatarPreview").attr("src", imgURL);
+                            $("#avatarPreview").css({ "display": "block" });
+                        });
+                    });
+                </script>
             </head>
 
             <body class="sb-nav-fixed">
@@ -31,8 +42,7 @@
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
                                             <form:form action="/admin/user/update" method="post"
-                                                modelAttribute="updateUser">
-                                                <!-- newUser là biến được lấy từ model.addAttribute("newUser", newUser()); nạp vào model bên controller-->
+                                                modelAttribute="updateUser" enctype="multipart/form-data">
                                                 <h1>Update User</h1>
                                                 <hr>
 
@@ -60,6 +70,33 @@
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">Address</label>
                                                     <form:input path="address" type="text" class="form-control" />
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">Role</label>
+                                                    <form:select class="form-select" path="role.name">
+                                                        <!--role.name <=> đối tượng role khai báo trong User khi thực hiện nối quan hệ, name là thuộc tính của class Role -->
+                                                        <form:option value="ADMIN">ADMIN</form:option>
+                                                        <form:option value="USER">USER</form:option>
+                                                    </form:select>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="avatarFile" class="form-label">Avatar
+                                                        Current:</label>
+                                                    <img alt="Avatar Current" style="max-height: 250px;"
+                                                        src="/images/avatar/${avatar}">
+                                                </div>
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label for="avatarFile" class="form-label">Avatar update</label>
+                                                    <input class="form-control" type="file" id="avatarFile"
+                                                        accept=".jpg , .png, .jpeg" name="avatarFile">
+                                                </div>
+
+                                                <div class="mb-3 col-12">
+                                                    <img alt="Avatar Preview" style="display: none; max-height: 250px;"
+                                                        id="avatarPreview">
                                                 </div>
 
                                                 <button type="submit" class="btn btn-warning">Update</button>

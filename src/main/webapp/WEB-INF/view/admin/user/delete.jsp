@@ -31,7 +31,7 @@
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
                                             <div class="alert alert-secondary" role="alert">
-                                                <h3>Delete the user with id = ${id}</h3>
+                                                <h3>Delete the user with id = ${deleteUser.id}</h3>
                                             </div>
                                             <hr>
                                             <div class="alert alert-danger" role="alert">
@@ -40,10 +40,9 @@
 
                                             <form:form action="/admin/user/delete" method="post"
                                                 modelAttribute="deleteUser">
-                                                <div class="mb-3" style="display: none;">
+                                                <div class="mb-3" style="display: block;">
                                                     <label for="" class="form-label">ID</label>
-                                                    <form:input path="id" type="text" class="form-control"
-                                                        value="${id}" />
+                                                    <form:input path="id" type="text" class="form-control" />
                                                 </div>
                                                 <button class="btn btn-danger">Confirm Delete</button>
                                             </form:form>

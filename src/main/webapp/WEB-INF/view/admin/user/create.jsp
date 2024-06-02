@@ -77,8 +77,12 @@
                                                     <label class="form-label">Role</label>
                                                     <form:select class="form-select" path="role.name">
                                                         <!--role.name <=> đối tượng role khai báo trong User khi thực hiện nối quan hệ, name là thuộc tính của class Role -->
-                                                        <form:option value="ADMIN">ADMIN</form:option>
-                                                        <form:option value="USER">USER</form:option>
+                                                        <!-- <form:option value="ADMIN">ADMIN</form:option>
+                                                        <form:option value="USER">USER</form:option> -->
+                                                        <c:forEach var="roles" items="${listRole}">
+                                                            <form:option value="${roles.name}">${roles.name}
+                                                            </form:option>
+                                                        </c:forEach>
                                                     </form:select>
                                                 </div>
 

@@ -31,7 +31,7 @@
                                     <div class="row">
                                         <div class="col-12 mx-auto">
                                             <div class="d-flex justify-content-between">
-                                                <h3>User Detail with id ${id}</h3>
+                                                <h3>User Detail with id ${infoUser.id}</h3>
                                                 <!-- ${id} được truyền từ controller khi add vào model -->
                                             </div>
                                             <hr>
@@ -41,6 +41,7 @@
                                                 </div>
                                                 <ul class="list-group list-group-flush">
                                                     <li class="list-group-item">ID - ${infoUser.id}</li>
+                                                    <li class="list-group-item">Role - ${infoUser.role.name}</li>
                                                     <li class="list-group-item">Email - ${infoUser.email}</li>
                                                     <li class="list-group-item">FullName - ${infoUser.fullName}</li>
                                                     <li class="list-group-item">Address - ${infoUser.address}</li>
