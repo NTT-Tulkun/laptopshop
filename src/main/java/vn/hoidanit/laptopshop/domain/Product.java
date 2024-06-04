@@ -2,6 +2,11 @@ package vn.hoidanit.laptopshop.domain;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,11 +17,24 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotEmpty(message = "Name product không được để trống")
     private String name;
+
+    @DecimalMin(value = "0", inclusive = false, message = "Price phải lớn hơn 0")
     private double price;
     private String image;
+
+    @NotNull
+    @NotEmpty(message = "DetailDesc không được để trống")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String detailDesc;
+
+    @NotEmpty(message = "ShortDesc không được để trống")
+    @Size(max = 100, message = "Không được vượt quá 100 ký tự")
     private String shortDesc;
+
+    @DecimalMin(value = "0", inclusive = false, message = "Quantity phải lớn hơn 0")
     private long quantity;
     private long sold;
     private String factory;

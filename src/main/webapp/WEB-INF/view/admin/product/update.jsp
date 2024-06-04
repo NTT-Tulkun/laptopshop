@@ -17,6 +17,14 @@
                 <script>
                     $(document).ready(() => {
                         const avatarFile = $("#avatarFile");
+
+                        const proImage = "${updatePro.image}";
+                        if (proImage) {
+                            const urlImage = "/images/product/" + proImage;
+                            $("#avatarPreview").attr("src", urlImage);
+                            $("#avatarPreview").css({ "display": "block" });
+                        }
+
                         avatarFile.change(function (e) {
                             const imgURL = URL.createObjectURL(e.target.files[0]);
                             $("#avatarPreview").attr("src", imgURL);
@@ -42,10 +50,15 @@
                                 <div>
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
-                                            <form:form action="/admin/product/create" method="post"
-                                                modelAttribute="newProduct" class="row" enctype="multipart/form-data">
+                                            <form:form action="/admin/product/update" method="post"
+                                                modelAttribute="updatePro" class="row" enctype="multipart/form-data">
                                                 <h1>Create a Product</h1>
                                                 <hr>
+
+                                                <div class="mb-3 col-12 col-md-6" style="display: none;">
+                                                    <label for="" class="form-label">ID</label>
+                                                    <form:input path="id" type="text" class="form-control" />
+                                                </div>
 
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <c:set var="errorName">
@@ -118,7 +131,8 @@
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label for="avatarFile" class="form-label">Avatar</label>
                                                     <input class="form-control" type="file" id="avatarFile"
-                                                        accept=".jpg , .png, .jpeg" name="avatarFile">
+                                                        accept=".jpg , .png, .jpeg" name="avatarFile" path="image">
+                                                    <form:input path="image" type="text" style="display: none;" />
                                                 </div>
 
                                                 <div class="mb-3 col-12">
@@ -127,7 +141,7 @@
                                                 </div>
 
                                                 <div class="col-12 mb-5">
-                                                    <button type="submit" class="btn btn-primary">Create</button>
+                                                    <button type="submit" class="btn btn-primary">Update</button>
                                                 </div>
                                             </form:form>
                                         </div>

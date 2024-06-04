@@ -10,6 +10,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -20,10 +24,24 @@ public class User {
     // IDENTITY là tự động tăng khóa chính
     // Annotation @Id và @GeneratedValue CHỈ ứng với thuộc tính ngay bên dưới nó(id)
     private long id;
+
+    @Email(message = "Email không hợp lệ", regexp = "^[\\w.-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
+    @NotEmpty(message = "Email không được để trống")
     private String email;
+
+    @NotEmpty(message = "Password không được để trống")
+    @Size(min = 6, message = "Password phải có ít nhất 6 ký tự")
     private String password;
+
+    @NotEmpty(message = "FullName không được để trống")
+    @Pattern(regexp = "^[A-Za-z]+( [A-Za-z]{2,})*$", message = "FullName không hợp lệ")
     private String fullName;
+
+    @NotEmpty(message = "Address không được để trống")
     private String address;
+
+    @Pattern(regexp = "^0\\d{9}$", message = "Phone không hợp lệ")
+    @NotEmpty(message = "Phone không được để trống")
     private String phone;
     private String avatar;
 

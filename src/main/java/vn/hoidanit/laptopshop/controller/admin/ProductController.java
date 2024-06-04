@@ -1,26 +1,116 @@
 package vn.hoidanit.laptopshop.controller.admin;
 
-// import java.util.List;
-
+import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import vn.hoidanit.laptopshop.domain.Product;
-// import vn.hoidanit.laptopshop.domain.Role;
-// import vn.hoidanit.laptopshop.domain.User;
+import vn.hoidanit.laptopshop.service.ProductService;
+import vn.hoidanit.laptopshop.service.UploadService;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class ProductController {
 
+    private final UploadService uploadService;
+    private final ProductService productService;
+
+    public ProductController(UploadService uploadService, ProductService productService) {
+        this.uploadService = uploadService;
+        this.productService = productService;
+    }
+
     @GetMapping("/admin/product")
-    public String getProduct() {
+    public String getProduct(Model model) {
+        List<Product> list = this.productService.getListProduct();
+        model.addAttribute("listProduct", list);
         return "admin/product/show";
     }
 
     @GetMapping("/admin/product/create")
-    public String getAddUserPage(Model model) {
+    public String getAddProductPage(Model model) {
         model.addAttribute("newProduct", new Product());
         return "admin/product/create";
     }
+
+    @PostMapping("/admin/product/create")
+    public String postAddProductPage(Model model, @ModelAttribute("newProduct") @Valid Product newPro,
+            BindingResult newProBindingResult, @RequestParam("avatarFile") MultipartFile file) {
+
+        if (newProBindingResult.hasErrors()) {
+            return "/admin/product/create";
+        }
+        String nameAvatarPro = this.uploadService.handleSaveUpLoadFile(file, "product");
+        System.out.println(nameAvatarPro);
+        newPro.setImage(nameAvatarPro);
+        this.productService.handleSaveProduct(newPro);
+
+        return "redirect:/admin/product";
+    }
+
+    @GetMapping("/admin/product/delete/{idpro}")
+    public String getDeleteProductPage(Model model, @PathVariable long idpro) {
+        Product deleteProduct = this.productService.getProductyID(idpro);
+        model.addAttribute("deletePro", deleteProduct);
+        return "admin/product/delete";
+    }
+
+    @PostMapping("/admin/product/delete")
+    public String postDeleteProduct(Model model, @ModelAttribute("newPro") Product deleteProduct) {
+        this.productService.deleteProductyID(deleteProduct.getId());
+        return "redirect:/admin/product";
+    }
+
+    @GetMapping("/admin/product/update/{idpro}")
+    public String getDeleteProduct(Model model, @PathVariable long idpro) {
+        Product updateProduct = this.productService.getProductyID(idpro);
+        model.addAttribute("updatePro", updateProduct);
+        return "admin/product/update";
+    }
+
+    @PostMapping("/admin/product/update")
+    public String postDeleteProduct(
+            Model model,
+            @ModelAttribute("updatePro") @Valid Product updateProduct,
+            BindingResult bindingResult,
+            @RequestParam("avatarFile") MultipartFile file) {
+
+        if (bindingResult.hasErrors()) {
+            return "/admin/product/update";
+        }
+
+        Product currentPro = this.productService.getProductyID(updateProduct.getId());
+        if (currentPro != null) {
+            if (!file.isEmpty()) {
+                String img = this.uploadService.handleSaveUpLoadFile(file, "product");
+                currentPro.setImage(img);
+            }
+            currentPro.setName(updateProduct.getName());
+            currentPro.setPrice(updateProduct.getPrice());
+            currentPro.setDetailDesc(updateProduct.getDetailDesc());
+            currentPro.setShortDesc(updateProduct.getShortDesc());
+            currentPro.setQuantity(updateProduct.getQuantity());
+            currentPro.setFactory(updateProduct.getFactory());
+            currentPro.setTarget(updateProduct.getTarget());
+            this.productService.handleSaveProduct(currentPro);
+        }
+        return "redirect:/admin/product";
+    }
+
+    @GetMapping("/admin/product/{idpro}")
+    public String getViewDetailProduct(Model model, @PathVariable long idpro) {
+        Product pro = this.productService.getProductyID(idpro);
+        model.addAttribute("infProduct", pro);
+        return "admin/product/detail";
+    }
+
 }

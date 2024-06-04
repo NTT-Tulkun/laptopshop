@@ -17,6 +17,13 @@
                 <script>
                     $(document).ready(() => {
                         const avatarFile = $("#avatarFile");
+                        const orgAvatar = "${updateUser.avatar}";
+                        if (orgAvatar) {
+                            const urlAvatar = "/images/avatar/" + orgAvatar;
+                            $("#avatarPreview").attr("src", urlAvatar);
+                            $("#avatarPreview").css({ "display": "block" });
+                        }
+
                         avatarFile.change(function (e) {
                             const imgURL = URL.createObjectURL(e.target.files[0]);
                             $("#avatarPreview").attr("src", imgURL);
@@ -36,7 +43,8 @@
                                 <h1 class="mt-4">Manage User</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">User</li>
+                                    <li class="breadcrumb-item active"><a href="/admin/user">User</a></li>
+                                    <li class="breadcrumb-item active">Update</li>
                                 </ol>
                                 <div class="container mt-5">
                                     <div class="row">
@@ -58,18 +66,33 @@
                                                 </div>
 
                                                 <div class="mb-3">
+                                                    <c:set var="errorPhone">
+                                                        <form:errors path="phone" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label for="" class="form-label">Phone number</label>
-                                                    <form:input path="phone" type="text" class="form-control" />
+                                                    <form:input path="phone" type="text"
+                                                        class="form-control ${not empty errorPhone ? 'is-invalid':''}" />
+                                                    ${errorPhone}
                                                 </div>
 
                                                 <div class="mb-3">
+                                                    <c:set var="errorFullname">
+                                                        <form:errors path="fullName" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label for="" class="form-label">Fullname</label>
-                                                    <form:input path="fullName" type="text" class="form-control" />
+                                                    <form:input path="fullName" type="text"
+                                                        class="form-control ${not empty errorFullname ? 'is-invalid':''}" />
+                                                    ${errorFullname}
                                                 </div>
 
                                                 <div class="mb-3">
+                                                    <c:set var="errorAddress">
+                                                        <form:errors path="address" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label for="" class="form-label">Address</label>
-                                                    <form:input path="address" type="text" class="form-control" />
+                                                    <form:input path="address" type="text"
+                                                        class="form-control ${not empty errorAddress ? 'is-invalid':''}" />
+                                                    ${errorAddress}
                                                 </div>
 
                                                 <div class="mb-3">
@@ -81,17 +104,11 @@
                                                     </form:select>
                                                 </div>
 
-                                                <div class="mb-3">
-                                                    <label for="avatarFile" class="form-label">Avatar
-                                                        Current:</label>
-                                                    <img alt="Avatar Current" style="max-height: 250px;"
-                                                        src="/images/avatar/${avatar}">
-                                                </div>
-
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label for="avatarFile" class="form-label">Avatar update</label>
                                                     <input class="form-control" type="file" id="avatarFile"
                                                         accept=".jpg , .png, .jpeg" name="avatarFile">
+                                                    <form:input path="avatar" type="text" style="display: none;" />
                                                 </div>
 
                                                 <div class="mb-3 col-12">
@@ -116,7 +133,7 @@
                 </div>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
                     crossorigin="anonymous"></script>
-                <script src="js/scripts.js"></script>
+                <script src="/js/scripts.js"></script>
             </body>
 
             </html>

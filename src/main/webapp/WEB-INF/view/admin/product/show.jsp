@@ -31,7 +31,8 @@
                                     <div class="col-12 mx-auto">
                                         <div class="d-flex justify-content-between">
                                             <h3>Table Products</h3>
-                                            <a href="/admin/product/create" class="btn btn-primary">Create User</a>
+                                            <a href="/admin/product/create" class="btn btn-primary">Create new
+                                                product</a>
                                         </div>
                                         <hr>
                                         <table class="table table-bordered table-hover">
@@ -45,18 +46,18 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach var="user" items="${users1}">
+                                                <c:forEach var="pro" items="${listProduct}">
                                                     <tr>
-                                                        <td>${user.id}</td>
-                                                        <td>${user.email}</td>
-                                                        <td>${user.fullName}</td>
-                                                        <td>${user.role.name}</td>
+                                                        <td>${pro.id}</td>
+                                                        <td>${pro.name}</td>
+                                                        <td>${pro.price}</td>
+                                                        <td>${pro.factory}</td>
                                                         <td>
-                                                            <a href="/admin/user/${user.id}"
+                                                            <a href="/admin/product/${pro.id}"
                                                                 class="btn btn-success">View</a>
-                                                            <a href="/admin/user/update/${user.id}"
+                                                            <a href="/admin/product/update/${pro.id}"
                                                                 class="btn btn-warning">Update</a>
-                                                            <a href="/admin/user/delete/${user.id}"
+                                                            <a href="/admin/product/delete/${pro.id}"
                                                                 class="btn btn-danger">Delete</a>
                                                         </td>
                                                     </tr>

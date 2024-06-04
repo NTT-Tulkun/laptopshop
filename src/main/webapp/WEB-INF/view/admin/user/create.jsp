@@ -49,28 +49,55 @@
                                                 <hr>
 
                                                 <div class="mb-3 col-12 col-md-6">
+                                                    <!--nếu như trường email này input lỗi thì biến errorEmailNotValid nhận giá
+                                                    trị lỗi, ngược lại errorEmail=null-->
+                                                    <c:set var="errorEmail">
+                                                        <form:errors path="email" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label for="" class="form-label">Email</label>
-                                                    <form:input path="email" type="email" class="form-control" />
+                                                    <form:input path="email" type="email"
+                                                        class="form-control ${not empty errorEmail ? 'is-invalid':''}" />
+                                                    ${errorEmail}
                                                 </div>
 
                                                 <div class="mb-3 col-12 col-md-6">
+                                                    <c:set var="errorPass">
+                                                        <form:errors path="password" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label for="" class="form-label">Password</label>
-                                                    <form:input path="password" type="text" class="form-control" />
+                                                    <form:input path="password" type="text"
+                                                        class="form-control ${not empty errorPass ? 'is-invalid':''}" />
+                                                    ${errorPass}
                                                 </div>
 
                                                 <div class="mb-3 col-12 col-md-6">
+                                                    <c:set var="errorPhone">
+                                                        <form:errors path="phone" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label for="" class="form-label">Phone number</label>
-                                                    <form:input path="phone" type="text" class="form-control" />
+                                                    <form:input path="phone" type="text"
+                                                        class="form-control ${not empty errorPhone ? 'is-invalid':''}" />
+                                                    ${errorPhone}
                                                 </div>
 
                                                 <div class="mb-3 col-12 col-md-6">
+                                                    <c:set var="errorFullname">
+                                                        <form:errors path="fullName" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label for="" class="form-label">Fullname</label>
-                                                    <form:input path="fullName" type="text" class="form-control" />
+                                                    <form:input path="fullName" type="text"
+                                                        class="form-control ${not empty errorFullname ? 'is-invalid':''}" />
+                                                    ${errorFullname}
                                                 </div>
 
                                                 <div class="mb-3">
+                                                    <c:set var="errorAddress">
+                                                        <form:errors path="address" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label for="" class="form-label">Address</label>
-                                                    <form:input path="address" type="text" class="form-control" />
+                                                    <form:input path="address" type="text"
+                                                        class="form-control ${not empty errorAddress ? 'is-invalid':''}" />
+                                                    ${errorAddress}
                                                 </div>
 
                                                 <div class="mb-3 col-12 col-md-6">
@@ -116,7 +143,7 @@
                 </div>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
                     crossorigin="anonymous"></script>
-                <script src="js/scripts.js"></script>
+                <script src="/js/scripts.js"></script>
             </body>
 
             </html>
