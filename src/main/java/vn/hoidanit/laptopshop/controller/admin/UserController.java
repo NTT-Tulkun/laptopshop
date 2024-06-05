@@ -38,15 +38,6 @@ public class UserController {
         this.roleService = roleService;
     }
 
-    // @RequestMapping("/")
-    // public String getHomePage(Model model) {
-    // List<User> arrUser = this.userService.getAllUserByEmail("3@gmail.com");
-    // System.out.println(arrUser);
-    // model.addAttribute("eric", "test");
-    // model.addAttribute("hoidanit", "hello from controller");
-    // return "hello";
-    // }
-
     @RequestMapping("/admin/user")
     public String getUserPage(Model model) {
         List<User> users = this.userService.getAllUsers();

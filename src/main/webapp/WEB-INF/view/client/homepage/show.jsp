@@ -60,7 +60,7 @@
                 <!-- Modal Search End -->
 
                 <jsp:include page="../layout/banner.jsp" />
-                <jsp:include page="../layout/featur.jsp" />
+
 
 
                 <!-- Fruits Shop Start-->
@@ -151,7 +151,7 @@
                 </div>
                 </div>
                 <!-- Fruits Shop End-->
-
+                <jsp:include page="../layout/featur.jsp" />
                 <jsp:include page="../layout/footer.jsp" />
 
                 <!-- JavaScript Libraries -->

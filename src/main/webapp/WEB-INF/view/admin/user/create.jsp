@@ -129,7 +129,7 @@
                                                 </div>
                                             </form:form>
 
-                                            <!-- 
+                                            <!--
                                         Từng giá trị của path ở trên mỗi thẻ input của form phải đặt trùng với tên biến đã khai báo bên class User
                                         vd: path="fullName" <=> private String fullName;
                                         -->

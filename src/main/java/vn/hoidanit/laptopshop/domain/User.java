@@ -37,11 +37,11 @@ public class User {
     @Pattern(regexp = "^[A-Za-z]+( [A-Za-z]{2,})*$", message = "FullName không hợp lệ")
     private String fullName;
 
-    @NotEmpty(message = "Address không được để trống")
+    // @NotEmpty(message = "Address không được để trống")
     private String address;
 
-    @Pattern(regexp = "^0\\d{9}$", message = "Phone không hợp lệ")
-    @NotEmpty(message = "Phone không được để trống")
+    // @Pattern(regexp = "^0\\d{9}$", message = "Phone không hợp lệ")
+    // @NotEmpty(message = "Phone không được để trống")
     private String phone;
     private String avatar;
 
