@@ -105,10 +105,10 @@ public class UserController {
             @RequestParam("avatarFile") MultipartFile file) {
         // updateUser <=> modelAttribute="updateUser" trong form update
 
-        // if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
 
-        // return "/admin/user/update";
-        // }
+            return "/admin/user/update";
+        }
 
         User currentUser = this.userService.getUserById(hoidanit.getId());
 

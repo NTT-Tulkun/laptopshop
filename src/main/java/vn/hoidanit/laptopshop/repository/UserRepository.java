@@ -12,11 +12,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User save(User hoidanit); // save(): vừa lưu những thay đổi nếu đối tượng tồn tại rồi,
                               // tạo mới nếu chưa tồn tại
 
-    List<User> findByEmail(String email); // List<User> là kiểu dữ liệu sẽ trả về
+    List<User> findOneByEmail(String email); // List<User> là kiểu dữ liệu sẽ trả về
 
     User findById(long id);
 
     void deleteById(long id);
 
     boolean existsByEmail(String email);
+
+    User findByEmail(String email);
 }

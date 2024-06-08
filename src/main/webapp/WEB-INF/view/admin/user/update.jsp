@@ -60,9 +60,14 @@
                                                 </div>
 
                                                 <div class="mb-3">
+                                                    <c:set var="errorEmail">
+                                                        <form:errors path="email" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label for="" class="form-label">Email</label>
-                                                    <form:input path="email" type="email" class="form-control"
+                                                    <form:input path="email" type="email"
+                                                        class="form-control ${not empty errorEmail ? 'is-invalid':''}"
                                                         disabled="true" />
+                                                    ${errorEmail}
                                                 </div>
 
                                                 <div class="mb-3">
