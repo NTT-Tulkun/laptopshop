@@ -32,6 +32,10 @@
                                                         <div class="my-2" style="color: red;">Invalid email or password.
                                                         </div>
                                                     </c:if>
+                                                    <c:if test="${param.logout != null}">
+                                                        <div class="my-2" style="color: green;">Logout success.
+                                                        </div>
+                                                    </c:if>
                                                     <div class="form-floating mb-3">
                                                         <input class="form-control" type="email"
                                                             placeholder="name@example.com" name="username" />
@@ -59,7 +63,7 @@
                                                     </div>
                                                     <div
                                                         class="d-flex align-items-center justify-content-center mt-4 mb-0">
-                                                        <a class="small" href="password.html">Forgot Password?</a>
+                                                        <a class="small" href="#">Forgot Password?</a>
                                                         <!-- <a class="btn btn-primary" href="index.html">Login</a> -->
                                                     </div>
                                                 </form>

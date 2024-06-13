@@ -1,4 +1,4 @@
-package vn.hoidanit.laptopshop.service;
+package vn.hoidanit.laptopshop.config;
 
 import java.io.IOException;
 import java.util.Collection;
