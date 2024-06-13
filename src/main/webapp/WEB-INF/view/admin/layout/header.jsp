@@ -10,7 +10,7 @@
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <c:if test="${not empty pageContext.request.userPrincipal}">
                     <span style="color: white;">
-                        <c:out value="${pageContext.request.userPrincipal.name}" />
+                        <c:out value="${sessionScope.fullName}" />
                     </span>
                     <!-- <div class="input-group">
     <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."

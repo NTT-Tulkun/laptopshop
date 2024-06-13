@@ -10,7 +10,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                 <meta name="description" content="" />
                 <meta name="author" content="" />
-                <title>Login - SB Admin</title>
+                <title>Login User</title>
                 <link href="css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
@@ -52,7 +52,7 @@
                                                     </div>
                                                     <div class="form-check mb-3">
                                                         <input class="form-check-input" id="inputRememberPassword"
-                                                            type="checkbox" value="" />
+                                                            type="checkbox" name="remember-me" />
                                                         <label class="form-check-label"
                                                             for="inputRememberPassword">Remember Password</label>
                                                     </div>
