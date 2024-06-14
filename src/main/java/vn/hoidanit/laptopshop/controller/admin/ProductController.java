@@ -1,6 +1,8 @@
 package vn.hoidanit.laptopshop.controller.admin;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -59,7 +61,7 @@ public class ProductController {
 
     @GetMapping("/admin/product/delete/{idpro}")
     public String getDeleteProductPage(Model model, @PathVariable long idpro) {
-        Product deleteProduct = this.productService.getProductyID(idpro);
+        Product deleteProduct = this.productService.getProductyID(idpro).get();
         model.addAttribute("deletePro", deleteProduct);
         return "admin/product/delete";
     }
@@ -72,7 +74,7 @@ public class ProductController {
 
     @GetMapping("/admin/product/update/{idpro}")
     public String getDeleteProduct(Model model, @PathVariable long idpro) {
-        Product updateProduct = this.productService.getProductyID(idpro);
+        Product updateProduct = this.productService.getProductyID(idpro).get();
         model.addAttribute("updatePro", updateProduct);
         return "admin/product/update";
     }
@@ -88,27 +90,28 @@ public class ProductController {
             return "/admin/product/update";
         }
 
-        Product currentPro = this.productService.getProductyID(updateProduct.getId());
-        if (currentPro != null) {
+        Optional<Product> currentPro = this.productService.getProductyID(updateProduct.getId());
+        Product currentProduct = currentPro.get();
+        if (currentProduct != null) {
             if (!file.isEmpty()) {
                 String img = this.uploadService.handleSaveUpLoadFile(file, "product");
-                currentPro.setImage(img);
+                currentProduct.setImage(img);
             }
-            currentPro.setName(updateProduct.getName());
-            currentPro.setPrice(updateProduct.getPrice());
-            currentPro.setDetailDesc(updateProduct.getDetailDesc());
-            currentPro.setShortDesc(updateProduct.getShortDesc());
-            currentPro.setQuantity(updateProduct.getQuantity());
-            currentPro.setFactory(updateProduct.getFactory());
-            currentPro.setTarget(updateProduct.getTarget());
-            this.productService.handleSaveProduct(currentPro);
+            currentProduct.setName(updateProduct.getName());
+            currentProduct.setPrice(updateProduct.getPrice());
+            currentProduct.setDetailDesc(updateProduct.getDetailDesc());
+            currentProduct.setShortDesc(updateProduct.getShortDesc());
+            currentProduct.setQuantity(updateProduct.getQuantity());
+            currentProduct.setFactory(updateProduct.getFactory());
+            currentProduct.setTarget(updateProduct.getTarget());
+            this.productService.handleSaveProduct(currentProduct);
         }
         return "redirect:/admin/product";
     }
 
     @GetMapping("/admin/product/{idpro}")
     public String getViewDetailProduct(Model model, @PathVariable long idpro) {
-        Product pro = this.productService.getProductyID(idpro);
+        Product pro = this.productService.getProductyID(idpro).get();
         model.addAttribute("infProduct", pro);
         return "admin/product/detail";
     }
