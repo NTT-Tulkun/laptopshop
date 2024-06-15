@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import jakarta.servlet.http.HttpSession;
 import vn.hoidanit.laptopshop.domain.Cart;
 import vn.hoidanit.laptopshop.domain.CartDetail;
 import vn.hoidanit.laptopshop.domain.Product;
@@ -44,31 +45,48 @@ public class ProductService {
         this.productRepository.deleteById(id);
     }
 
-    public void handleAddProductToCart(String email, long productId) {
+    public void handleAddProductToCart(String email, long productId, HttpSession session) {
         User user = this.userService.getUserByEmail(email);
         if (user != null) {
             Cart cart = this.cartRepository.findByUser(user);
             if (cart == null) {
                 // Tạo mới
-                Cart otherCart = new Cart();
-                otherCart.setUser(user);
-                otherCart.setSum(1);
-                cart = this.cartRepository.save(otherCart);
+                Cart newCart = new Cart();
+                newCart.setUser(user);
+                newCart.setSum(0);
+                cart = this.cartRepository.save(newCart);
             }
 
             // Lưu cart_Detail
             // Tìm product by id
             Optional<Product> pro = this.productRepository.findById(productId);
             if (pro.isPresent()) {
+                // check sản phẩm đã từng thêm vào giỏ hàng trước đây chưa:
                 Product realProduct = pro.get();
-                CartDetail cartDetail = new CartDetail();
-                cartDetail.setCart(cart);
-                cartDetail.setProduct(realProduct);
-                cartDetail.setPrice(realProduct.getPrice());
-                cartDetail.setQuantity(1);
-                this.cartDetailRepository.save(cartDetail);
+                CartDetail currentDetail = this.cartDetailRepository.findByCartAndProduct(cart, realProduct);
+                if (currentDetail == null) {
+                    CartDetail newCartDetail = new CartDetail();
+                    newCartDetail.setCart(cart);
+                    newCartDetail.setProduct(realProduct);
+                    newCartDetail.setPrice(realProduct.getPrice());
+                    newCartDetail.setQuantity(1);
+                    this.cartDetailRepository.save(newCartDetail);
+                    // update sum cho cart
+                    int quantityProductCart = cart.getSum() + 1;
+                    cart.setSum(quantityProductCart);
+                    this.cartRepository.save(cart);
+                    session.setAttribute("sum", quantityProductCart);
+                } else {
+                    currentDetail.setQuantity(currentDetail.getQuantity() + 1);
+                    this.cartDetailRepository.save(currentDetail);
+                }
+
             }
 
         }
+    }
+
+    public Cart fetchCartByUser(User user) {
+        return this.cartRepository.findByUser(user);
     }
 }
