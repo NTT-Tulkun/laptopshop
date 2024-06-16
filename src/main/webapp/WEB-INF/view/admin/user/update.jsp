@@ -59,15 +59,16 @@
                                                     <form:input path="id" type="text" class="form-control" />
                                                 </div>
 
+                                                <div class="mb-3" style="display: none;">
+                                                    <label for="" class="form-label">Password</label>
+                                                    <form:input path="password" type="text" class="form-control" />
+                                                </div>
+
                                                 <div class="mb-3">
-                                                    <c:set var="errorEmail">
-                                                        <form:errors path="email" cssClass="invalid-feedback" />
-                                                    </c:set>
                                                     <label for="" class="form-label">Email</label>
                                                     <form:input path="email" type="email"
                                                         class="form-control ${not empty errorEmail ? 'is-invalid':''}"
-                                                        disabled="true" />
-                                                    ${errorEmail}
+                                                        readonly="true" />
                                                 </div>
 
                                                 <div class="mb-3">

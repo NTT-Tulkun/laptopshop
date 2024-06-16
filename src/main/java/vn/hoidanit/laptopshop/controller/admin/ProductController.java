@@ -49,7 +49,7 @@ public class ProductController {
             BindingResult newProBindingResult, @RequestParam("avatarFile") MultipartFile file) {
 
         if (newProBindingResult.hasErrors()) {
-            return "/admin/product/create";
+            return "admin/product/create";
         }
         String nameAvatarPro = this.uploadService.handleSaveUpLoadFile(file, "product");
         System.out.println(nameAvatarPro);
@@ -87,7 +87,7 @@ public class ProductController {
             @RequestParam("avatarFile") MultipartFile file) {
 
         if (bindingResult.hasErrors()) {
-            return "/admin/product/update";
+            return "admin/product/update";
         }
 
         Optional<Product> currentPro = this.productService.getProductyID(updateProduct.getId());

@@ -77,7 +77,7 @@ public class UserController {
         if (newUserBindingResult.hasErrors()) {
             List<Role> roles = this.roleService.getAllRole();
             model.addAttribute("listRole", roles);
-            return "/admin/user/create";
+            return "admin/user/create";
         }
         //
         String avatar = this.uploadService.handleSaveUpLoadFile(file, "avatar");
@@ -104,13 +104,16 @@ public class UserController {
             BindingResult bindingResult,
             @RequestParam("avatarFile") MultipartFile file) {
         // updateUser <=> modelAttribute="updateUser" trong form update
-
-        if (bindingResult.hasErrors()) {
-
-            return "/admin/user/update";
+        List<FieldError> errors = bindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(">>>>>" + error.getField() + " - " + error.getDefaultMessage());
         }
 
         User currentUser = this.userService.getUserById(hoidanit.getId());
+
+        if (bindingResult.hasErrors()) {
+            return "admin/user/update";
+        }
 
         if (currentUser != null) {
             if (!file.isEmpty()) {
