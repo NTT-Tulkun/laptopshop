@@ -61,8 +61,8 @@ public class ProductService {
             // Tìm product by id
             Optional<Product> pro = this.productRepository.findById(productId);
             if (pro.isPresent()) {
-                // check sản phẩm đã từng thêm vào giỏ hàng trước đây chưa:
                 Product realProduct = pro.get();
+                // check sản phẩm đã từng thêm vào giỏ hàng trước đây chưa:
                 CartDetail currentDetail = this.cartDetailRepository.findByCartAndProduct(cart, realProduct);
                 if (currentDetail == null) {
                     CartDetail newCartDetail = new CartDetail();
