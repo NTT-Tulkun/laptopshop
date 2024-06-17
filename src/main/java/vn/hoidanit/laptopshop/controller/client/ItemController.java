@@ -44,24 +44,23 @@ public class ItemController {
 
     @GetMapping("/cart")
     public String getCartPage(Model model, HttpServletRequest request) {
-        User currentUser = new User();
+        User currentUser = new User();// null
         HttpSession session = request.getSession(false);
         long id = (long) session.getAttribute("id");
         currentUser.setId(id);
+
         Cart cart = this.productService.fetchCartByUser(currentUser);
+
+        List<CartDetail> cartDetails = cart == null ? new ArrayList<CartDetail>() : cart.getCartDetail();
+
         double totalPrice = 0;
-        if (cart == null) {
-            List<CartDetail> listCartDetailOfUser = new ArrayList<CartDetail>();
-            model.addAttribute("cartDetails", listCartDetailOfUser);
-            model.addAttribute("totalPrice", null);
-        } else {
-            List<CartDetail> listCartDetailOfUser = cart.getCartDetail();
-            for (CartDetail cartDetail : listCartDetailOfUser) {
-                totalPrice += cartDetail.getPrice() * cartDetail.getQuantity();
-            }
-            model.addAttribute("cartDetails", listCartDetailOfUser);
-            model.addAttribute("totalPrice", totalPrice);
+        for (CartDetail cd : cartDetails) {
+            totalPrice += cd.getPrice() * cd.getQuantity();
         }
+
+        model.addAttribute("cartDetails", cartDetails);
+        model.addAttribute("totalPrice", totalPrice);
+
         return "client/cart/show";
     }
 
