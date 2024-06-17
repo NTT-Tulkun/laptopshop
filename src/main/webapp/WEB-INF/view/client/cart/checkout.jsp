@@ -52,7 +52,7 @@
                         <div class="modal-dialog modal-fullscreen">
                             <div class="modal-content rounded-0">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
@@ -65,7 +65,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>Search by keyword
                     </div>
                     <!-- Modal Search End -->
 
@@ -76,7 +76,7 @@
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Cart Details</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Payment information</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -125,24 +125,12 @@
                                                     </td>
                                                     <td>
                                                         <div class="input-group quantity mt-4" style="width: 100px;">
-                                                            <div class="input-group-btn">
-                                                                <button
-                                                                    class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                                                    <i class="fa fa-minus"></i>
-                                                                </button>
-                                                            </div>
                                                             <input type="text"
                                                                 class="form-control form-control-sm text-center border-0"
                                                                 value="${cartDetail.quantity}"
                                                                 data-cart-detail-id="${cartDetail.id}"
                                                                 data-cart-detail-price="${cartDetail.price}"
                                                                 data-cart-detail-index="${status.index}">
-                                                            <div class="input-group-btn">
-                                                                <button
-                                                                    class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                                                    <i class="fa fa-plus"></i>
-                                                                </button>
-                                                            </div>
                                                         </div>
                                                     </td>
                                                     <td>
@@ -170,72 +158,101 @@
                                     </tbody>
                                 </table>
                             </div>
-
-                            <div class="mt-5 row g-4 justify-content-start">
-                                <c:if test="${totalPrice!=0}">
-                                    <div class="mt-5">
-                                        <input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4"
-                                            placeholder="Coupon Code">
-                                        <button class="btn border-secondary rounded-pill px-4 py-3 text-primary"
-                                            type="button">Apply
-                                            Coupon</button>
-                                    </div>
-                                    <div class="col-12 col-md-8">
-                                        <div class="bg-light rounded">
-                                            <div class="p-4">
-                                                <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span>
-                                                </h1>
-                                                <div class="d-flex justify-content-between mb-4">
-                                                    <h5 class="mb-0 me-4">Subtotal:</h5>
-                                                    <p class="mb-0" data-cart-total-price="${totalPrice}">
-                                                        <fmt:formatNumber type="number" value="${totalPrice}" />đ
-                                                    </p>
-                                                </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <h5 class="mb-0 me-4">Shipping</h5>
-                                                    <div class="">
-                                                        <p class="mb-0">0đ</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-                                                <h5 class="mb-0 ps-4 me-4">Total</h5>
-                                                <p class="mb-0 pe-4" data-cart-total-price="${totalPrice}">
-                                                    <fmt:formatNumber type="number" value="${totalPrice}" />đ
-                                                </p>
-                                            </div>
-                                            <form:form action="/confirm-checkout" method="post" modelAttribute="cart">
-                                                <input type="hidden" name="${_csrf.parameterName}"
-                                                    value="${_csrf.token}" />
-                                                <div style="display: none;">
-                                                    <c:forEach var="cartDetail" items="${cart.cartDetail}"
-                                                        varStatus="status">
-                                                        <div class="mb-3 col-12 col-md-6">
-                                                            <label class="form-label">ID</label>
-                                                            <form:input path="cartDetail[${status.index}].id"
-                                                                type="text" class="form-control"
-                                                                value="${cartDetail.id}" />
-                                                        </div>
-                                                        <div class="mb-3 col-12 col-md-6">
-                                                            <label class="form-label">Quantity</label>
-                                                            <form:input path="cartDetail[${status.index}].quantity"
-                                                                type="text" class="form-control"
-                                                                value="${cartDetail.quantity}" />
-                                                        </div>
-                                                    </c:forEach>
-                                                </div>
-                                                <button
-                                                    class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-                                                    type="submit">Proceed Checkout</button>
-                                            </form:form>
-                                        </div>
-                                    </div>
-                                </c:if>
-                            </div>
                         </div>
                     </div>
                     <!-- Cart Page End -->
+
+
+                    <!-- Checkout Page Start -->
+                    <div class="container-fluid py-3">
+                        <div class="container py-3">
+                            <form:form action="/place-order" method="post" modelAttribute="cart">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                <div class="row g-4 justify-content-start">
+                                    <div class="col-md-6 col-12">
+                                        <h1 class="mb-4">Receiver's information</h1>
+                                        <div class="form-item">
+                                            <label class="form-label my-3">Recipient's full name<sup>*</sup></label>
+                                            <input class="form-control" name="receiverName" required />
+                                        </div>
+                                        <div class="form-item">
+                                            <label class="form-label my-3">Recipient's address <sup>*</sup></label>
+                                            <input class="form-control" name="receiverAddress" required />
+                                        </div>
+                                        <div class="form-item">
+                                            <label class="form-label my-3">Recipient's phone number <sup>*</sup></label>
+                                            <input class="form-control" name="receiverPhone" required />
+                                        </div>
+                                        <div class="mt-4">
+                                            <i class="fas fa-arrow-left"></i>
+                                            <a href="/cart">Return to cart</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <h1 class="mb-4">Receiver's information</h1>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">
+                                                        </th>
+                                                        <td>
+                                                            <p class="mb-0 text-dark text-uppercase py-3">Transport fee
+                                                            </p>
+                                                        </td>
+
+                                                        <td class="py-5"></td>
+                                                        <td>
+                                                            <div class="py-3">
+                                                                <p class="mb-0 text-dark">0đ</p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">
+                                                        </th>
+                                                        <td>
+                                                            <p class="mb-0 text-dark text-uppercase py-3">form of
+                                                                transportation</p>
+                                                        </td>
+
+                                                        <td class="py-5"></td>
+                                                        <td>
+                                                            <div class="py-3">
+                                                                <p class="mb-0 text-dark">Payment on delivery (COD)</p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">
+                                                        </th>
+                                                        <td>
+                                                            <p class="mb-0 text-dark text-uppercase py-3">TOTAL</p>
+                                                        </td>
+
+                                                        <td class="py-5"></td>
+                                                        <td>
+                                                            <div class="py-3">
+                                                                <p class="mb-0 text-dark">
+                                                                    <fmt:formatNumber type="number"
+                                                                        value="${totalPrice}" />đ
+                                                                </p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <button
+                                                class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4">
+                                                Payment confirmation
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form:form>
+                        </div>
+                    </div>
+                    <!-- Checkout Page End -->
 
                     <jsp:include page="../layout/footer.jsp" />
 
