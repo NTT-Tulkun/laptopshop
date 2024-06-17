@@ -89,4 +89,26 @@ public class ProductService {
     public Cart fetchCartByUser(User user) {
         return this.cartRepository.findByUser(user);
     }
+
+    public void handleDeleteCartDetail(long id_cartDetail, HttpSession session) {
+        Optional<CartDetail> cartDetailOptional = this.cartDetailRepository.findById(id_cartDetail);
+        if (cartDetailOptional.isPresent()) {
+            CartDetail cartDetail = cartDetailOptional.get();
+
+            Cart currentCart = cartDetail.getCart();
+
+            this.cartDetailRepository.deleteById(id_cartDetail);
+
+            if (currentCart.getSum() > 1) {
+                int sum = currentCart.getSum() - 1;
+                currentCart.setSum(sum);
+                session.setAttribute("sum", sum);
+                this.cartRepository.save(currentCart);
+            } else {
+                // xoa cart (sum=1)
+                this.cartRepository.deleteById(currentCart.getId());
+                session.setAttribute("sum", 0);
+            }
+        }
+    }
 }
