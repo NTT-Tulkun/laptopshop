@@ -8,10 +8,14 @@ import org.springframework.stereotype.Service;
 import jakarta.servlet.http.HttpSession;
 import vn.hoidanit.laptopshop.domain.Cart;
 import vn.hoidanit.laptopshop.domain.CartDetail;
+import vn.hoidanit.laptopshop.domain.Order;
+import vn.hoidanit.laptopshop.domain.OrderDetail;
 import vn.hoidanit.laptopshop.domain.Product;
 import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.repository.CartDetailRepository;
 import vn.hoidanit.laptopshop.repository.CartRepository;
+import vn.hoidanit.laptopshop.repository.OrderDetailRepository;
+import vn.hoidanit.laptopshop.repository.OrderRepository;
 import vn.hoidanit.laptopshop.repository.ProductRepository;
 
 @Service
@@ -20,13 +24,18 @@ public class ProductService {
     private final CartRepository cartRepository;
     private final CartDetailRepository cartDetailRepository;
     private final UserService userService;
+    private final OrderRepository orderRepository;
+    private final OrderDetailRepository orderDetailRepository;
 
     public ProductService(ProductRepository productRepository, CartRepository cartRepository,
-            CartDetailRepository cartDetailRepository, UserService userService) {
+            CartDetailRepository cartDetailRepository, UserService userService,
+            OrderRepository orderRepository, OrderDetailRepository orderDetailRepository) {
         this.productRepository = productRepository;
         this.cartDetailRepository = cartDetailRepository;
         this.cartRepository = cartRepository;
         this.userService = userService;
+        this.orderRepository = orderRepository;
+        this.orderDetailRepository = orderDetailRepository;
     }
 
     public Product handleSaveProduct(Product pro) {
@@ -120,6 +129,53 @@ public class ProductService {
                 currentCartDetail.setQuantity(cartDetail.getQuantity());
                 this.cartDetailRepository.save(currentCartDetail);
             }
+        }
+    }
+
+    public void handlePlaceOrder(
+            User user, HttpSession session,
+            String receiverName, String receiverAddress, String receiverPhone) {
+
+        // Bước 1: Lấy cart dựa vào user
+        Cart cart = this.cartRepository.findByUser(user);
+        if (cart != null) {
+            List<CartDetail> listCartDetails = cart.getCartDetail();
+            if (listCartDetails != null) {
+                // Tạo 1 order
+                Order order = new Order();
+                order.setUser(user);
+                order.setReceiverName(receiverName);
+                order.setReceiverAddress(receiverAddress);
+                order.setReceiverPhone(receiverPhone);
+                order.setStatus("PENDING");
+
+                double sumTotal = 0;
+                for (CartDetail cartDetail : listCartDetails) {
+                    sumTotal += cartDetail.getPrice() * cartDetail.getQuantity();
+                }
+                order.setTotalPrice(sumTotal);
+                order = this.orderRepository.save(order);
+
+                // Tạo 1 orderDetail
+                for (CartDetail cartDetail : listCartDetails) {
+                    OrderDetail orderDetail = new OrderDetail();
+                    orderDetail.setOrder(order);
+                    orderDetail.setProduct(cartDetail.getProduct());
+                    orderDetail.setQuantity(cartDetail.getQuantity());
+                    orderDetail.setPrice(cartDetail.getPrice());
+                    this.orderDetailRepository.save(orderDetail);
+                }
+
+                // Bước 2: xóa cartdetail and cart
+                for (CartDetail cartDetail : listCartDetails) {
+                    this.cartDetailRepository.deleteById(cartDetail.getId());
+                }
+                this.cartRepository.deleteById(cart.getId());
+
+                // Bước 3: update session
+                session.setAttribute("sum", 0);
+            }
+
         }
     }
 }
