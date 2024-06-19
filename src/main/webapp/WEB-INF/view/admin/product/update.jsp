@@ -52,7 +52,7 @@
                                         <div class="col-md-6 col-12 mx-auto">
                                             <form:form action="/admin/product/update" method="post"
                                                 modelAttribute="updatePro" class="row" enctype="multipart/form-data">
-                                                <h1>Create a Product</h1>
+                                                <h1>Update a Product</h1>
                                                 <hr>
 
                                                 <div class="mb-3 col-12 col-md-6" style="display: none;">

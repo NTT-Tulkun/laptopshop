@@ -38,8 +38,7 @@
                                                 <h2>Are you sure to delete this user?</h2>
                                             </div>
 
-                                            <form:form action="/admin/user/delete" method="post"
-                                                modelAttribute="deleteUser">
+                                            <form:form action="/admin/user/delete" method="post" modelAttribute="">
                                                 <div class="mb-3" style="display: none;">
                                                     <label for="" class="form-label">ID</label>
                                                     <form:input path="id" type="text" class="form-control" />
