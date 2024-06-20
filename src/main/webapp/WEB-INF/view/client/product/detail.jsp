@@ -122,17 +122,20 @@
                                             </button>
                                         </div>
                                         <input type="text" class="form-control form-control-sm text-center border-0"
-                                            value="1">
+                                            value="1" data-cart-detail-index="0">
                                         <div class="input-group-btn">
                                             <button class="btn btn-sm btn-plus rounded-circle bg-light border">
                                                 <i class="fa fa-plus"></i>
                                             </button>
                                         </div>
                                     </div>
-                                    <form action="/add-product-to-cart/${product.id}" method="post">
+                                    <form action="/add-product-form-view-detail" method="post" modelAttribute="product">
                                         <div>
                                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                         </div>
+                                        <input name="id" type="number" class="form-control" value="${product.id}" />
+                                        <input name="quantity" type="text" class="form-control"
+                                            id="cartDetail0.quantity" value="1" />
                                         <button
                                             class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
                                                 class="fa fa-shopping-bag me-2 text-primary"></i>
