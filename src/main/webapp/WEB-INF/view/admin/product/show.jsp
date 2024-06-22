@@ -15,12 +15,12 @@
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
 
-            <body class="sb-nav-fixed">
+            <body class="sb-nav-fixed d-flex flex-column min-vh-100">
                 <jsp:include page="../layout/header.jsp" />
-                <div id="layoutSidenav">
+                <div id="layoutSidenav" class="d-flex">
                     <jsp:include page="../layout/sidebar.jsp" />
-                    <div id="layoutSidenav_content">
-                        <main>
+                    <div id="layoutSidenav_content" class="flex-grow-1 d-flex flex-column">
+                        <main class="flex-grow-1">
                             <div class="container-fluid px-4">
                                 <h1 class="mt-4">Manage Product</h1>
                                 <ol class="breadcrumb mb-4">
@@ -72,6 +72,28 @@
                                 </div>
                             </div>
                         </main>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item">
+                                    <a class="${1 == currentPage ? 'disabled page-link':'page-link'}"
+                                        href="/admin/product?page=${currentPage-1}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <c:forEach begin="0" end="${totalPages-1}" varStatus="loop">
+                                    <li class="page-item"><a
+                                            class="${(loop.index+1) == currentPage ? 'active page-link':'page-link'}"
+                                            href="/admin/product?page=${loop.index+1}">${loop.index+1}</a>
+                                    </li>
+                                </c:forEach>
+                                <li class="page-item">
+                                    <a class="${totalPages == currentPage ? 'disabled page-link':'page-link'}"
+                                        href="/admin/product?page=${currentPage+1}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                         <jsp:include page="../layout/footer.jsp" />
                     </div>
                 </div>
