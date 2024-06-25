@@ -67,29 +67,30 @@
                                     </div>
                                 </div>
                             </div>
-                        </main>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item">
-                                    <a class="${1 == currentPage ? 'disabled page-link':'page-link'}"
-                                        href="/admin/order?page=${currentPage-1}" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <c:forEach begin="0" end="${totalPages-1}" varStatus="loop">
-                                    <li class="page-item"><a
-                                            class="${(loop.index+1) == currentPage ? 'active page-link':'page-link'}"
-                                            href="/admin/order?page=${loop.index+1}">${loop.index+1}</a>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item">
+                                        <a class="${1 == currentPage ? 'disabled page-link':'page-link'}"
+                                            href="/admin/order?page=${currentPage-1}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
                                     </li>
-                                </c:forEach>
-                                <li class="page-item">
-                                    <a class="${totalPages == currentPage ? 'disabled page-link':'page-link'}"
-                                        href="/admin/order?page=${currentPage+1}" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                                    <c:forEach begin="0" end="${totalPages-1}" varStatus="loop">
+                                        <li class="page-item"><a
+                                                class="${(loop.index+1) == currentPage ? 'active page-link':'page-link'}"
+                                                href="/admin/order?page=${loop.index+1}">${loop.index+1}</a>
+                                        </li>
+                                    </c:forEach>
+                                    <li class="page-item">
+                                        <a class="${totalPages == currentPage ? 'disabled page-link':'page-link'}"
+                                            href="/admin/order?page=${currentPage+1}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </main>
+
                         <jsp:include page="../layout/footer.jsp" />
                     </div>
                 </div>
