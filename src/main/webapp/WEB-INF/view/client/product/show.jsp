@@ -255,10 +255,18 @@
                                         <nav class="aria-label=" Page navigation example"">
                                             <div class="pagination d-flex justify-content-center mt-5">
                                                 <li class="page-item">
-                                                    <a class="${1 == currentPage ? 'disabled page-link' : 'page-link'}"
-                                                        href="/product?page=${currentPage - 1}" aria-label="Previous">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                    </a>
+                                                    <c:if test="${currentPage == 1}">
+                                                        <a class="disabled page-link" href="/product?page=1"
+                                                            aria-label="Previous">
+                                                            <span aria-hidden="true">&laquo;</span>
+                                                        </a>
+                                                    </c:if>
+                                                    <c:if test="${currentPage > 1}">
+                                                        <a class="page-link" href="/product?page=${currentPage - 1}"
+                                                            aria-label="Previous">
+                                                            <span aria-hidden="true">&laquo;</span>
+                                                        </a>
+                                                    </c:if>
                                                 </li>
                                                 <c:forEach begin="0" end="${totalPages - 1}" varStatus="loop">
                                                     <li class="page-item">
@@ -269,10 +277,18 @@
                                                     </li>
                                                 </c:forEach>
                                                 <li class="page-item">
-                                                    <a class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                                        href="/product?page=${currentPage + 1}" aria-label="Next">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
+                                                    <c:if test="${currentPage == totalPages}">
+                                                        <a class="disabled page-link" href="/product?page=${totalPages}"
+                                                            aria-label="Previous">
+                                                            <span aria-hidden="true">&raquo;</span>
+                                                        </a>
+                                                    </c:if>
+                                                    <c:if test="${currentPage != totalPages}">
+                                                        <a class="page-link" href="/product?page=${currentPage + 1}"
+                                                            aria-label="Previous">
+                                                            <span aria-hidden="true">&raquo;</span>
+                                                        </a>
+                                                    </c:if>
                                                 </li>
                                             </div>
                                         </nav>
