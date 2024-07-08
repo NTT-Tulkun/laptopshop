@@ -24,8 +24,12 @@ public class ProductSpecs {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Product_.FACTORY), factory);
     }
 
-    public static Specification<Product> matchFactories(List<String> factory) {
+    public static Specification<Product> matchListFactories(List<String> factory) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.in(root.get(Product_.FACTORY)).value(factory);
+    }
+
+    public static Specification<Product> matchListTarget(List<String> target) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.in(root.get(Product_.TARGET)).value(target);
     }
 
     public static Specification<Product> matchPrice(double min, double max) {

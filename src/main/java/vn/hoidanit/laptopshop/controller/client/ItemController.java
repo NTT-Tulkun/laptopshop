@@ -217,7 +217,7 @@ public class ItemController {
         }
 
         Pageable pageable = PageRequest.of(page - 1, 60);
-        Page<Product> prs = this.productService.getListProduct(pageable);
+        Page<Product> prs = this.productService.fetchProductWithSpec(pageable, productCriteriaDTO);
 
         // String name = nameOptional.isPresent() ? nameOptional.get() : "";
         // Page<Product> prs = this.productService.fetchProductWithSpec(pageable, name);
