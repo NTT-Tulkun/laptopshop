@@ -56,7 +56,7 @@
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">Danh Sách Sản Phẩm
+                                            <li class="breadcrumb-item active" aria-current="page">List of products
                                             </li>
                                         </ol>
                                     </nav>
@@ -66,7 +66,7 @@
                                     <div class="col-12 col-md-4">
                                         <div class="row g-4">
                                             <div class="col-12" id="factoryFilter">
-                                                <div class="mb-2"><b>Hãng sản xuất</b></div>
+                                                <div class="mb-2"><b>Manufacturer</b></div>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="factory-1"
                                                         value="APPLE">
@@ -102,7 +102,7 @@
 
                                             </div>
                                             <div class="col-12" id="targetFilter">
-                                                <div class="mb-2"><b>Mục đích sử dụng</b></div>
+                                                <div class="mb-2"><b>Intended use</b></div>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="target-1"
                                                         value="GAMING">
@@ -112,76 +112,80 @@
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="target-2"
                                                         value="SINHVIEN-VANPHONG">
-                                                    <label class="form-check-label" for="target-2">Sinh viên - văn
-                                                        phòng</label>
+                                                    <label class="form-check-label" for="target-2">Students -
+                                                        Offices</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="target-3"
                                                         value="THIET-KE-DO-HOA">
-                                                    <label class="form-check-label" for="target-3">Thiết kế đồ
-                                                        họa</label>
+                                                    <label class="form-check-label" for="target-3">Graphic
+                                                        Design</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="target-4"
                                                         value="MONG-NHE">
-                                                    <label class="form-check-label" for="target-4">Mỏng nhẹ</label>
+                                                    <label class="form-check-label" for="target-4">Slim and
+                                                        light</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="target-5"
                                                         value="DOANH-NHAN">
-                                                    <label class="form-check-label" for="target-5">Doanh nhân</label>
+                                                    <label class="form-check-label" for="target-5">Entrepreneur</label>
                                                 </div>
 
 
                                             </div>
                                             <div class="col-12" id="priceFilter">
-                                                <div class="mb-2"><b>Mức giá</b></div>
+                                                <div class="mb-2"><b>Pricing</b></div>
 
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="price-2"
                                                         value="duoi-10-trieu">
-                                                    <label class="form-check-label" for="price-2">Dưới 10 triệu</label>
+                                                    <label class="form-check-label" for="price-2">Less than 10
+                                                        million</label>
                                                 </div>
 
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="price-3"
                                                         value="10-15-trieu">
-                                                    <label class="form-check-label" for="price-3">Từ 10 - 15
-                                                        triệu</label>
+                                                    <label class="form-check-label" for="price-3">From 10 - 15
+                                                        million</label>
                                                 </div>
 
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="price-4"
                                                         value="15-20-trieu">
-                                                    <label class="form-check-label" for="price-4">Từ 15 - 20
-                                                        triệu</label>
+                                                    <label class="form-check-label" for="price-4">From 15 - 20
+                                                        million</label>
                                                 </div>
 
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" id="price-5"
                                                         value="tren-20-trieu">
-                                                    <label class="form-check-label" for="price-5">Trên 20 triệu</label>
+                                                    <label class="form-check-label" for="price-5">Over 20
+                                                        million</label>
                                                 </div>
                                             </div>
                                             <div class="col-12">
-                                                <div class="mb-2"><b>Sắp xếp</b></div>
+                                                <div class="mb-2"><b>Sort</b></div>
 
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" id="sort-1"
                                                         value="gia-tang-dan" name="radio-sort">
-                                                    <label class="form-check-label" for="sort-1">Giá tăng dần</label>
+                                                    <label class="form-check-label" for="sort-1">Rising price</label>
                                                 </div>
 
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" id="sort-2"
                                                         value="gia-giam-dan" name="radio-sort">
-                                                    <label class="form-check-label" for="sort-2">Giá giảm dần</label>
+                                                    <label class="form-check-label" for="sort-2">Declining
+                                                        price</label>
                                                 </div>
 
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" id="sort-3" checked
                                                         value="gia-nothing" name="radio-sort">
-                                                    <label class="form-check-label" for="sort-3">Không sắp xếp</label>
+                                                    <label class="form-check-label" for="sort-3">Unarranged</label>
                                                 </div>
 
                                             </div>
@@ -189,7 +193,7 @@
                                                 <button
                                                     class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4"
                                                     id="btnFilter">
-                                                    Lọc Sản Phẩm
+                                                    Product Filter
                                                 </button>
                                             </div>
                                         </div>
@@ -197,7 +201,7 @@
                                     <div class="col-12 col-md-8 text-center">
                                         <div class="row g-4">
                                             <c:if test="${totalPages == 0}">
-                                                <div>Không có sản phẩm phù hợp</div>
+                                                <div>No suitable product</div>
                                             </c:if>
                                             <c:forEach var="product" items="${products}">
                                                 <div class="col-md-6 col-lg-4">
@@ -248,7 +252,7 @@
                                                 <div class="pagination d-flex justify-content-center mt-5">
                                                     <li class="page-item">
                                                         <a class="${1 eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                                            href="/product?page=${currentPage - 1}"
+                                                            href="/product?page=${currentPage - 1}${queryString}"
                                                             aria-label="Previous">
                                                             <span aria-hidden="true">&laquo;</span>
                                                         </a>
@@ -256,14 +260,15 @@
                                                     <c:forEach begin="0" end="${totalPages - 1}" varStatus="loop">
                                                         <li class="page-item">
                                                             <a class="${(loop.index + 1) eq currentPage ? 'active page-link' : 'page-link'}"
-                                                                href="/product?page=${loop.index + 1}">
+                                                                href="/product?page=${loop.index + 1}${queryString}">
                                                                 ${loop.index + 1}
                                                             </a>
                                                         </li>
                                                     </c:forEach>
                                                     <li class="page-item">
                                                         <a class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                                            href="/product?page=${currentPage + 1}" aria-label="Next">
+                                                            href="/product?page=${currentPage + 1}${queryString}"
+                                                            aria-label="Next">
                                                             <span aria-hidden="true">&raquo;</span>
                                                         </a>
                                                     </li>

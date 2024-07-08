@@ -130,12 +130,13 @@
                                         </div>
                                     </div>
                                     <form action="/add-product-form-view-detail" method="post" modelAttribute="product">
-                                        <div>
+                                        <div style="display: none;">
                                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+                                            <input name="id" type="number" class="form-control" value="${product.id}" />
+                                            <input name="quantity" type="text" class="form-control"
+                                                id="cartDetail0.quantity" value="1" />
                                         </div>
-                                        <input name="id" type="number" class="form-control" value="${product.id}" />
-                                        <input name="quantity" type="text" class="form-control"
-                                            id="cartDetail0.quantity" value="1" />
                                         <button
                                             class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
                                                 class="fa fa-shopping-bag me-2 text-primary"></i>
